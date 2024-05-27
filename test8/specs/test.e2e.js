@@ -1,8 +1,8 @@
 const { expect } = require('@wdio/globals')
 const LoginPage = require('../pageobjects/login.page')
 const InventoryPage = require('../pageobjects/inventory.page')
-const CartPage = require('../pageobjects/cart.page')
-const CheckoutPage = require('../pageobjects/checkout.page')
+const cartPage = require('../pageobjects/cart.page')
+const checkoutPage = require('../pageobjects/checkout.page')
 const CheckoutCompletePage = require('../pageobjects/checkout.complete.page')
 const checkoutCompletePage = require('../pageobjects/checkout.complete.page')
 
@@ -21,7 +21,7 @@ describe('My Login application', () => {
         const currentUrl = await browser.getUrl();
         expect(currentUrl).toContain('inventory');
 
-       // Verify products and cart are displayed
+        // Verify products and cart are displayed
         const isInventoryPageDisplayed = await InventoryPage.isPageDisplayed();
         expect(isInventoryPageDisplayed).toBe(true);
 
@@ -30,29 +30,29 @@ describe('My Login application', () => {
         const isCartNotEmpty = await InventoryPage.isItemInCart();
         expect(isCartNotEmpty).toBe(true);
 
-        await CartPage.shoppingCartButton.click();
-        const currentCartUrl  = await browser.getUrl();
+        await cartPage.shoppingCartButton.click();
+        const currentCartUrl = await browser.getUrl();
         expect(currentCartUrl).toEqual('https://www.saucedemo.com/cart.html');
-      
-       const isItemLabsBackpackCardDisplayed = await CartPage.itemLabsBackpack.isDisplayed();
-       expect(isItemLabsBackpackCardDisplayed).toBe(true);
 
-       await CheckoutPage.checkoutButton.click();
+        const isItemLabsBackpackCardDisplayed = await cartPage.itemLabsBackpack.isDisplayed();
+        expect(isItemLabsBackpackCardDisplayed).toBe(true);
 
-       const currentUrlafterClickCheckoutButton = await browser.getUrl();
-       expect(currentUrlafterClickCheckoutButton).toEqual('https://www.saucedemo.com/checkout-step-one.html');
+        await checkoutPage.checkoutButton.click();
+
+        const currentUrlafterClickCheckoutButton = await browser.getUrl();
+        expect(currentUrlafterClickCheckoutButton).toEqual('https://www.saucedemo.com/checkout-step-one.html');
 
 
-       await CheckoutPage.checkout('standard', 'user', '123');
+        await checkoutPage.checkout('standard', 'user', '123');
 
-       await CheckoutPage.finishButton.click();
+        await checkoutPage.finishButton.click();
 
-       const currentUrlafterClickFinishButton = await browser.getUrl();
-       expect(currentUrlafterClickFinishButton).toEqual('https://www.saucedemo.com/checkout-complete.html');
+        const currentUrlafterClickFinishButton = await browser.getUrl();
+        expect(currentUrlafterClickFinishButton).toEqual('https://www.saucedemo.com/checkout-complete.html');
 
-       const isCompleteHeaderDisplayed = await checkoutCompletePage.completeHeader.isDisplayed();
+        const isCompleteHeaderDisplayed = await checkoutCompletePage.completeHeader.isDisplayed();
         expect(isCompleteHeaderDisplayed).toBe(true);
-      
+
         const isTextIsShown = await (await checkoutCompletePage.completeHeader).getText();
         expect(isTextIsShown).toContain('Thank you for your order!');
 
@@ -60,15 +60,15 @@ describe('My Login application', () => {
 
         const currentUrlafterClickbackToProductsButton = await browser.getUrl();
         expect(currentUrlafterClickbackToProductsButton).toEqual('https://www.saucedemo.com/inventory.html');
-       
+
 
         const isCartEmpty = await InventoryPage.isNoItemInCart();
         expect(isCartEmpty).toBe(true);
 
-    
+
     });
 });
 
-    
+
 
 

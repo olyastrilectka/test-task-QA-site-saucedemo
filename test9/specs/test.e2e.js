@@ -19,28 +19,28 @@ describe('My saucedemo site', () => {
         const currentUrl = await browser.getUrl();
         expect(currentUrl).toContain('inventory');
 
-       // Verify products and cart are displayed
+        // Verify products and cart are displayed
         const isInventoryPageDisplayed = await InventoryPage.isPageDisplayed();
         expect(isInventoryPageDisplayed).toBe(true);
 
         await CartPage.shoppingCartButton.click();
-        const currentCartUrl  = await browser.getUrl();
+        const currentCartUrl = await browser.getUrl();
         expect(currentCartUrl).toEqual('https://www.saucedemo.com/cart.html');
-      
-       const errorMessageElement = await $("//*[contains(text(),'Cart is empty')]");
-       const errorMessageElementExisting = await errorMessageElement.isExisting();
 
-       if(!errorMessageElementExisting){
-        throw new Error('Error is not displayed');
-       }
-       const errorMessage = errorMessageElement.getText();
+        const errorMessageElement = await $("//*[contains(text(),'Cart is empty')]");
+        const errorMessageElementExisting = await errorMessageElement.isExisting();
+
+        if (!errorMessageElementExisting) {
+            throw new Error('Error is not displayed');
+        }
+        const errorMessage = errorMessageElement.getText();
 
         expect(errorMessage).toContain('Cart is empty');
 
-     
+
     });
 });
 
-    
+
 
 

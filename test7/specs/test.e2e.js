@@ -1,4 +1,3 @@
-const { expect } = require('@wdio/globals')
 const LoginPage = require('../pageobjects/login.page')
 const InventoryPage = require('../pageobjects/inventory.page')
 
@@ -26,10 +25,10 @@ describe('My Login application', () => {
         await browser.closeWindow();
         await browser.switchWindow('https://www.saucedemo.com/inventory.html');
 
-        
+
         await InventoryPage.socialFacebookbutton.click();
-       await browser.switchWindow('https://www.facebook.com/saucelabs');
-        
+        await browser.switchWindow('https://www.facebook.com/saucelabs');
+
         const currentUrlafterClickFacebookbutton = await browser.getUrl();
         expect(currentUrlafterClickFacebookbutton).toEqual('https://www.facebook.com/saucelabs');
         await browser.closeWindow();
@@ -46,6 +45,6 @@ describe('My Login application', () => {
     });
 });
 
-    
+
 
 

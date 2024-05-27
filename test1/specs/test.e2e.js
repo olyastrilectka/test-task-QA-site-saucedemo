@@ -1,4 +1,3 @@
-const { expect } = require('@wdio/globals')
 const LoginPage = require('../pageobjects/login.page')
 const InventoryPage = require('../pageobjects/inventory.page')
 
@@ -23,6 +22,6 @@ describe('My Login application', () => {
     });
 });
 
-    
+
 
 
